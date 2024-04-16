@@ -440,10 +440,10 @@ def parse_opt(known=False):
     # parser.add_argument('--weights', type=str, default=ROOT / 'yolo.pt', help='initial weights path')
     # parser.add_argument('--cfg', type=str, default='', help='model.yaml path')
     parser.add_argument('--weights', type=str, default='', help='initial weights path')
-    parser.add_argument('--cfg', type=str, default='yolo.yaml', help='model.yaml path')
-    parser.add_argument('--data', type=str, default=ROOT / 'data/coco.yaml', help='dataset.yaml path')
+    parser.add_argument('--cfg', type=str, default='models\detect\yolov9-c.yaml', help='model.yaml path')
+    parser.add_argument('--data', type=str, default=ROOT / 'data/myData.yaml', help='dataset.yaml path')
     parser.add_argument('--hyp', type=str, default=ROOT / 'data/hyps/hyp.scratch-high.yaml', help='hyperparameters path')
-    parser.add_argument('--epochs', type=int, default=100, help='total training epochs')
+    parser.add_argument('--epochs', type=int, default=20, help='total training epochs')
     parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs, -1 for autobatch')
     parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=640, help='train, val image size (pixels)')
     parser.add_argument('--rect', action='store_true', help='rectangular training')
@@ -488,6 +488,8 @@ def parse_opt(known=False):
 
 
 def main(opt, callbacks=Callbacks()):
+    
+    
     # Checks
     if RANK in {-1, 0}:
         print_args(vars(opt))
@@ -640,5 +642,13 @@ def run(**kwargs):
 
 
 if __name__ == "__main__":
+    #统计时间
+    import time
+    start = time.time()
     opt = parse_opt()
     main(opt)
+    #统计时间
+    end = time.time()
+    #输出到一个txt
+    with open('time.txt','w') as f:
+        f.write(str(end-start))

@@ -1,0 +1,9 @@
+DataSets/*.*
+DataSets/
+data/
+*.pyc
+__pycache__/
+venv/
+DataSets/belgalogos/images/07573021.jpg
+
+runs/
